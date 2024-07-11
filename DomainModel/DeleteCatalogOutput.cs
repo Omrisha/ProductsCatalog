@@ -1,6 +1,6 @@
 ﻿namespace DomainModel;
 
-public class UpdateNewProductOutput
+public class DeleteCatalogOutput
 {
     public List<string> Errors { get; set; }
 }

@@ -68,9 +68,9 @@ public class ProductService : IProductService
         return productDtos;
     }
 
-    public async Task<CreateNewProductOutput> CreateProductAsync(CreateNewProductInput product)
+    public async Task<CreateProductOutput> CreateProductAsync(CreateProductInput product)
     {
-        CreateNewProductOutput output = new()
+        CreateProductOutput output = new()
         {
             Errors = new(),
         };
@@ -86,7 +86,7 @@ public class ProductService : IProductService
 
         if (output.Errors.Count == 0)
         {
-            Product newProduct = this.mapper.Map<CreateNewProductInput, Product>(product);
+            Product newProduct = this.mapper.Map<CreateProductInput, Product>(product);
 
             Product created = await this.productRepository
                 .CreateAsync(newProduct);
@@ -98,9 +98,9 @@ public class ProductService : IProductService
     }
     
 
-    public async Task<UpdateNewProductOutput> UpdateProductAsync(UpdateNewProductInput product)
+    public async Task<UpdateProductOutput> UpdateProductAsync(UpdateProductInput product)
     {
-        UpdateNewProductOutput output = new()
+        UpdateProductOutput output = new()
         {
             Errors = new(),
         };
@@ -121,7 +121,7 @@ public class ProductService : IProductService
             output.Errors.Add("Product with selected key not found");
         }
 
-        this.mapper.Map<UpdateNewProductInput, Product>(product, productToUpdate);
+        this.mapper.Map<UpdateProductInput, Product>(product, productToUpdate);
 
         await this.productRepository
             .UpdateAsync(productToUpdate);
@@ -129,9 +129,9 @@ public class ProductService : IProductService
         return output;
     }
 
-    public async Task<DeleteNewProductOutput> DeleteProductAsync(Guid id)
+    public async Task<DeleteProductOutput> DeleteProductAsync(Guid id)
     {
-        DeleteNewProductOutput output = new()
+        DeleteProductOutput output = new()
         {
             Errors = new(),
         };

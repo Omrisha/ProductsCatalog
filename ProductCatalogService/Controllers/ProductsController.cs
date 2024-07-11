@@ -60,9 +60,9 @@ public class ProductsController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateProduct([FromBody] CreateNewProductInput product)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductInput product)
     {
-        CreateNewProductOutput output = await this.productService
+        CreateProductOutput output = await this.productService
             .CreateProductAsync(product);
 
         if (output.Errors.Count != 0)
@@ -74,9 +74,9 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("{id")]
-    public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpdateNewProductInput product)
+    public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpdateProductInput product)
     {
-        UpdateNewProductOutput output = await this.productService
+        UpdateProductOutput output = await this.productService
             .UpdateProductAsync(product);
 
         if (output.Errors.Count != 0)
@@ -90,7 +90,7 @@ public class ProductsController : ControllerBase
     [HttpDelete("{id")]
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
-        DeleteNewProductOutput output = await this.productService
+        DeleteProductOutput output = await this.productService
             .DeleteProductAsync(id);
 
         if (output.Errors.Count != 0)

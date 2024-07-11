@@ -1,6 +1,6 @@
 namespace DomainModel;
 
-public class CreateNewProductOutput
+public class CreateProductOutput
 {
     public List<string> Errors { get; set; }
     

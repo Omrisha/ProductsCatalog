@@ -11,10 +11,10 @@ public class CatalogRepository : Repository<Catalog>, ICatalogRepository
     {
     }
     
-    public async Task<IEnumerable<Catalog>> GetCatalogByProductIdAsync(Guid productId)
+    public async Task<Catalog> GetCatalogByProductIdAsync(Guid productId)
     {
         return await this.GetCollection()
-            .Find(e => e.Products.Any(p => p.Id == productId))
-            .ToListAsync();
+            .Find(e => e.Products.Any(p => p == productId))
+            .FirstOrDefaultAsync();
     }
 }

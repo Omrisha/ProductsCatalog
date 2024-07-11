@@ -5,7 +5,7 @@ namespace PersistanceModel.MongoDB;
 
 public interface ICatalogRepository
 {
-    Task<IEnumerable<Catalog>> GetCatalogByProductIdAsync(Guid productId);
+    Task<Catalog> GetCatalogByProductIdAsync(Guid productId);
     IMongoCollection<Catalog> GetCollection();
     Task<IEnumerable<Catalog>> GetAllAsync();
     Task<Catalog> GetByIdAsync(Guid id);

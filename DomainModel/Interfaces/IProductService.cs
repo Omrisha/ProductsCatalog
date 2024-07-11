@@ -6,7 +6,7 @@ public interface IProductService
     Task<ProductDto> GetProductByIdAsync(Guid id);
     Task<IEnumerable<ProductDto>> GetProductsByCategoryAsync(CategoryEnum category);
     Task<IEnumerable<ProductDto>> GetProductsByPriceLimitAsync(decimal priceLimit);
-    Task<CreateNewProductOutput> CreateProductAsync(CreateNewProductInput product);
-    Task<UpdateNewProductOutput> UpdateProductAsync(UpdateNewProductInput product);
-    Task<DeleteNewProductOutput> DeleteProductAsync(Guid id);
+    Task<CreateProductOutput> CreateProductAsync(CreateProductInput product);
+    Task<UpdateProductOutput> UpdateProductAsync(UpdateProductInput product);
+    Task<DeleteProductOutput> DeleteProductAsync(Guid id);
 }

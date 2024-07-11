@@ -6,5 +6,5 @@ public class Catalog : BaseEntity
 {
     public string Title { get; set; }
 
-    public List<Product> Products { get; set; }
+    public List<Guid> Products { get; set; }
 }

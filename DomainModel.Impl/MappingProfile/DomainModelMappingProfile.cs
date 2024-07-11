@@ -7,8 +7,8 @@ public class DomainModelMappingProfile : Profile
 {
     public DomainModelMappingProfile()
     {
-        this.CreateMap<CreateNewProductInput, Product>();
-        this.CreateMap<UpdateNewProductInput, Product>();
+        this.CreateMap<CreateProductInput, Product>();
+        this.CreateMap<UpdateProductInput, Product>();
         this.CreateMap<Product, ProductDto>()
             .IncludeAllDerived();
 
