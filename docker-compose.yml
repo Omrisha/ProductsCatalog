@@ -1,0 +1,23 @@
+﻿version: '3.7'
+
+services:
+  productcatalogservice:
+    image: productcatalogservice
+    build:
+      context: .
+      dockerfile: ProductCatalogService/Dockerfile
+    ports:
+      - 8005:80
+      - 8006:443
+  mongodbcontainer:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0-preview.6.24327.7" />
+      <PackageReference Include="MongoDB.Bson" Version="2.27.0" />
+      <PackageReference Include="MongoDB.Driver" Version="2.27.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Infrastructure.EntityModel\Infrastructure.EntityModel.csproj" />
+    </ItemGroup>
+
+</Project>
