@@ -73,9 +73,10 @@ public class ProductsController : ControllerBase
         return this.Ok(output.ProductId);
     }
 
-    [HttpPut("{id")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpdateProductInput product)
     {
+        product.Id = id;
         UpdateProductOutput output = await this.productService
             .UpdateProductAsync(product);
 
@@ -87,7 +88,7 @@ public class ProductsController : ControllerBase
         return this.NoContent();
     }
 
-    [HttpDelete("{id")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
         DeleteProductOutput output = await this.productService

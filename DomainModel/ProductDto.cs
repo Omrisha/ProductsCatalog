@@ -13,4 +13,6 @@ public class ProductDto
     public CategoryEnum Category { get; set; }
 
     public bool IsActive { get; set; }
+
+    public List<UniquePropertyDto> UniqueProperties { get; set; }
 }

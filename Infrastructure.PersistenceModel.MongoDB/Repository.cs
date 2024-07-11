@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Infrastructure.EntityModel.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -35,6 +36,11 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     public async Task<TEntity> GetByIdAsync(Guid id)
     {
         return await this.collection.Find(e => e.Id == id).FirstOrDefaultAsync();
+    }
+    
+    public async Task<IEnumerable<TEntity>> GetByFilterAsync(Expression<Func<TEntity, bool>> filter)
+    {
+        return await this.collection.Find(filter).ToListAsync();
     }
     
     public async Task<TEntity> CreateAsync(TEntity entity)

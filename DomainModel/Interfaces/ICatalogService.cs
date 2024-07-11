@@ -2,11 +2,11 @@
 {
     public interface ICatalogService
     {
-        Task<CreateCatalogOutput> CreateCatalogAsync(CreateCatalogInput Catalog);
+        Task<CreateCatalogOutput> CreateCatalogAsync(CreateCatalogInput catalog);
         Task<DeleteCatalogOutput> DeleteCatalogAsync(Guid id);
         Task<CatalogDto> GetCatalogByIdAsync(Guid id);
         Task<IEnumerable<CatalogDto>> GetCatalogsAsync();
-        Task<IEnumerable<CatalogDto>> GetCatalogsByProductIdAsync(Guid productId);
-        Task<UpdateCatalogOutput> UpdateCatalogAsync(UpdateCatalogInput Catalog);
+        Task<CatalogDto> GetCatalogByProductIdAsync(Guid productId);
+        Task<UpdateCatalogOutput> UpdateCatalogAsync(UpdateCatalogInput catalog);
     }
 }

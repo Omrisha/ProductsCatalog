@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using DomainModel;
 using DomainModel.Impl;
 using DomainModel.Impl.MappingProfile;
 using DomainModel.Interfaces;
@@ -37,6 +38,8 @@ public static class Extensions
         services.AddAutoMapper(typeof(DomainModelMappingProfile));
         
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ICatalogService, CatalogService>();
+        
         
         return services;
     }
@@ -51,8 +54,6 @@ public static class Extensions
         app.UseForwardedHeaders();
 
         app.UseRouting();
-        app.UseDefaultFiles();
-        app.UseStaticFiles();
 
         string[] allowedOrigins = app.Services.GetRequiredService<IOptionsMonitor<WebApiOptions>>().CurrentValue.AllowedOrigins;
         app.UseCors(

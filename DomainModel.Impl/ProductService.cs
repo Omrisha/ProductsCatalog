@@ -28,24 +28,15 @@ public class ProductService : IProductService
         IEnumerable<Product> products = await this.productRepository
             .GetAllAsync();
 
-        List<ProductDto> productDtos = MapProducts(products);
-
-        return productDtos;
+        return this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
     }
 
     public async Task<ProductDto> GetProductByIdAsync(Guid id)
     {
         Product product = await this.productRepository
             .GetByIdAsync(id) ?? throw new KeyNotFoundException("Product with selected key not found");
-
-        ProductDto productDto = product.Category switch
-        {
-            EntityModel.CategoryEnum.ElectricProduct => this.mapper.Map<Product, ElectricProductDto>(product),
-            EntityModel.CategoryEnum.FreshProduct => this.mapper.Map<Product, FreshProductDto>(product),
-            _ => this.mapper.Map<Product, ProductDto>(product),
-        };
-
-        return productDto;
+        
+        return this.mapper.Map<Product, ProductDto>(product);
     }
 
     public async Task<IEnumerable<ProductDto>> GetProductsByCategoryAsync(CategoryEnum category)
@@ -53,9 +44,7 @@ public class ProductService : IProductService
         IEnumerable<Product> products = await this.productRepository
             .GetProductsByCategoryAsync((EntityModel.CategoryEnum)category);
 
-        List<ProductDto> productDtos = MapProducts(products);
-
-        return productDtos;
+        return this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
     }
 
     public async Task<IEnumerable<ProductDto>> GetProductsByPriceLimitAsync(decimal priceLimit)
@@ -63,9 +52,7 @@ public class ProductService : IProductService
         IEnumerable<Product> products = await this.productRepository
             .GetProductsByPriceLimitAsync(priceLimit);
 
-        List<ProductDto> productDtos = MapProducts(products);
-
-        return productDtos;
+        return this.mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
     }
 
     public async Task<CreateProductOutput> CreateProductAsync(CreateProductInput product)
@@ -150,26 +137,7 @@ public class ProductService : IProductService
         return output;
     }
 
-    private List<ProductDto> MapProducts(IEnumerable<Product> products)
-    {
-        List<ProductDto> productDtos = new();
-
-        foreach (Product product in products)
-        {
-            ProductDto productDto = product.Category switch
-            {
-                EntityModel.CategoryEnum.ElectricProduct => this.mapper.Map<Product, ElectricProductDto>(product),
-                EntityModel.CategoryEnum.FreshProduct => this.mapper.Map<Product, FreshProductDto>(product),
-                _ => this.mapper.Map<Product, ProductDto>(product),
-            };
-
-            productDtos.Add(productDto);
-        }
-
-        return productDtos;
-    }
-
-    private static List<string> FreshProductValidations(List<UniquePropertyDto> uniqueProperties)
+    private static List<string> ElectricalProductValidations(List<UniquePropertyDto> uniqueProperties)
     {
         List<string> errors = new();
 
@@ -210,7 +178,7 @@ public class ProductService : IProductService
         return errors;
     }
 
-    private static List<string> ElectricalProductValidations(List<UniquePropertyDto> uniqueProperties)
+    private static List<string> FreshProductValidations(List<UniquePropertyDto> uniqueProperties)
     {
         List<string> errors = new();
 
