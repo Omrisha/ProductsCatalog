@@ -2,5 +2,7 @@ namespace DomainModel;
 
 public class ElectricProductDto : ProductDto
 {
-    public DateTime ExpiryDate { get; set; }
+    public string Voltage { get; set; }
+
+    public string SocketType { get; set; }
 }

@@ -9,17 +9,20 @@ public class DomainModelMappingProfile : Profile
     {
         this.CreateMap<CreateNewProductInput, Product>();
         this.CreateMap<UpdateNewProductInput, Product>();
-        this.CreateMap<Product, ProductDto>();
+        this.CreateMap<Product, ProductDto>()
+            .IncludeAllDerived();
 
         this.CreateMap<Product, ElectricProductDto>()
-            .ForMember(d => ((ElectricProductDto)d).ExpiryDate,
-                m => m.MapFrom(s => s.UniqueProperties.FirstOrDefault(u => u.Name == "ExpiryDate").Value));
-        
-        this.CreateMap<Product, FreshProductDto>()
-            .ForMember(d => ((FreshProductDto)d).SocketType,
+            .ForMember(d => d.SocketType,
                 m => m.MapFrom(s => s.UniqueProperties.FirstOrDefault(u => u.Name == "SocketType").Value))
-            .ForMember(d => ((FreshProductDto)d).Voltage,
+            .ForMember(d => d.Voltage,
                 m => m.MapFrom(s => s.UniqueProperties.FirstOrDefault(u => u.Name == "Voltage").Value));
+
+        this.CreateMap<Product, FreshProductDto>()
+            .ForMember(d => d.ExpiryDate,
+                m => m.MapFrom(s => s.UniqueProperties.FirstOrDefault(u => u.Name == "ExpiryDate").Value));
+
+
         this.CreateMap<UniquePropertyDto, UniqueProperty>();
     }
 }

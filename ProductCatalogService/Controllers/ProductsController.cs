@@ -72,4 +72,32 @@ public class ProductsController : ControllerBase
         
         return this.Ok(output.ProductId);
     }
+
+    [HttpPut("{id")]
+    public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] UpdateNewProductInput product)
+    {
+        UpdateNewProductOutput output = await this.productService
+            .UpdateProductAsync(product);
+
+        if (output.Errors.Count != 0)
+        {
+            return this.BadRequest(output.Errors);
+        }
+
+        return this.NoContent();
+    }
+
+    [HttpDelete("{id")]
+    public async Task<IActionResult> DeleteProduct(Guid id)
+    {
+        DeleteNewProductOutput output = await this.productService
+            .DeleteProductAsync(id);
+
+        if (output.Errors.Count != 0)
+        {
+            return this.BadRequest(output.Errors);
+        }
+
+        return this.NoContent();
+    }
 }

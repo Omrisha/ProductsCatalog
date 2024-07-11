@@ -1,14 +1,15 @@
-﻿version: '3.7'
+version: '3.4'
 
 services:
   productcatalogservice:
-    image: productcatalogservice
+    image: ${DOCKER_REGISTRY-}productcatalogservice
     build:
       context: .
       dockerfile: ProductCatalogService/Dockerfile
     ports:
       - 8005:80
       - 8006:443
+
   mongodbcontainer:
     image: mongo:latest
     environment:
