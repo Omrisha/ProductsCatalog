@@ -39,7 +39,7 @@ Catalogs endpoints:
 - Update a catalog
 
 
-## Product CRUD
+## Product CRUD - JSON Examples
 
 POST /Products 
 - Body:
@@ -58,6 +58,46 @@ POST /Products
 }
 ```
 
+GET /Products
+```json
+
+  {
+    "id": "2f5eee20-a0ca-4a42-9ead-a57840789f53",
+    "title": "Groot",
+    "description": "An electric groot robot from Guardians of the Galaxy",
+    "price": 100,
+    "category": "FreshProduct",
+    "isActive": false,
+    "uniqueProperties": [
+      {
+        "name": "ExpiryDate",
+        "value": "2025-09-11"
+      }
+    ]
+  },
+  {
+    "id": "954f880b-1391-46be-9113-7741c7fa76fc",
+    "title": "iPhone 15 Pro",
+    "description": "A celular phone by Apple Inc",
+    "price": 1000,
+    "category": "ElectricProduct",
+    "isActive": false,
+    "uniqueProperties": [
+      {
+        "name": "SocketType",
+        "value": "US"
+      },
+      {
+        "name": "Voltage",
+        "value": "110v"
+      }
+    ]
+  }
+]
+```
+
+## Catalog CRUD
+
 POST /Catalogs
 - Body:
 ```json
@@ -65,6 +105,48 @@ POST /Catalogs
   "title": "Guardians Of The Galaxy Catalog",
   "products": [
     "2f5eee20-a0ca-4a42-9ead-a57840789f53"
+  ]
+}
+```
+
+GET /Catalogs/{id}
+```json
+{
+  "id": "eeb0c0f7-7e87-47ab-ac0e-3c7cec7e501c",
+  "title": "Guardians Of The Galaxy Catalog 2",
+  "products": [
+    {
+      "id": "2f5eee20-a0ca-4a42-9ead-a57840789f53",
+      "title": "Groot",
+      "description": "An electric groot robot from Guardians of the Galaxy",
+      "price": 100,
+      "category": "FreshProduct",
+      "isActive": false,
+      "uniqueProperties": [
+        {
+          "name": "ExpiryDate",
+          "value": "2025-09-11"
+        }
+      ]
+    },
+    {
+      "id": "954f880b-1391-46be-9113-7741c7fa76fc",
+      "title": "iPhone 15 Pro",
+      "description": "A celular phone by Apple Inc",
+      "price": 1000,
+      "category": "ElectricProduct",
+      "isActive": false,
+      "uniqueProperties": [
+        {
+          "name": "SocketType",
+          "value": "US"
+        },
+        {
+          "name": "Voltage",
+          "value": "110v"
+        }
+      ]
+    }
   ]
 }
 ```

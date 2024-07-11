@@ -98,7 +98,15 @@ public class CatalogService : ICatalogService
         {
             Errors = new(),
         };
-        
+
+        foreach (Guid productId in catalog.Products)
+        {
+            Product? product = await this.productRepository.GetByIdAsync(productId);
+            if (product == null)
+            {
+                output.Errors.Add($"Product {productId} with selected key not found");
+            }
+        }
         // If one of the product is a fresh one, check it expiry date is at 
         // least 7 days from now
         output.Errors = await FreshProductValidations(catalog.Products);
@@ -124,6 +132,15 @@ public class CatalogService : ICatalogService
             Errors = new(),
         };
 
+        foreach (Guid productId in catalog.Products)
+        {
+            Product? product = await this.productRepository.GetByIdAsync(productId);
+            if (product == null)
+            {
+                output.Errors.Add($"Product {productId} with selected key not found");
+            }
+        }
+        
         // If one of the product is a fresh one, check it expiry date is at 
         // least 7 days from now
         output.Errors = await FreshProductValidations(catalog.Products);
@@ -135,14 +152,15 @@ public class CatalogService : ICatalogService
             output.Errors.Add("Catalog with selected key not found");
         }
         
-        if (catalogToUpdate.Products.Concat(catalog.Products).Distinct().Count() != catalog.Products.Count)
+        if (catalogToUpdate.Products.Intersect(catalog.Products).Any())
         {
             output.Errors.Add("Catalog can't contain duplicate products");
         }
         
         if (output.Errors.Count == 0)
         {
-            this.mapper.Map<UpdateCatalogInput, Catalog>(catalog, catalogToUpdate);
+            catalogToUpdate.Title = catalog.Title;
+            catalogToUpdate.Products.AddRange(catalog.Products);
 
             await this.catalogRepository
                 .UpdateAsync(catalogToUpdate);

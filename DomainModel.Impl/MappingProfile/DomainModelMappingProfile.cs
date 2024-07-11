@@ -13,7 +13,8 @@ public class DomainModelMappingProfile : Profile
         this.CreateMap<UniqueProperty, UniquePropertyDto>();
         this.CreateMap<UniquePropertyDto, UniqueProperty>();
         
-        this.CreateMap<Catalog, CatalogDto>();
+        this.CreateMap<Catalog, CatalogDto>()
+            .ForMember(d => d.Products, m => m.Ignore());
         
         this.CreateMap<CreateCatalogInput, Catalog>();
         this.CreateMap<UpdateCatalogInput, Catalog>();

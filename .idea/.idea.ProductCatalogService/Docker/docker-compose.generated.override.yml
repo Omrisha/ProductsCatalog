@@ -6,17 +6,30 @@ services:
       context: "/Users/omrishapira/Desktop/ProductsCatalog"
       dockerfile: "ProductCatalogService/Dockerfile"
       target: "base"
+      args:
+        BUILD_CONFIGURATION: "Debug"
     command: []
     entrypoint:
-    - "dotnet"
-    - "/app/bin/Debug/net6.0/ProductCatalogService.dll"
+    - "/opt/rider-debugger/linux-arm64/dotnet/dotnet"
+    - "/opt/rider-debugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    - "--timeout=60"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/rider-debugger"
+      RESHARPER_LOG_CONF: "/etc/opt/rider-debugger/backend-log.xml"
     image: "productcatalogservice:dev"
-    ports: []
+    ports:
+    - "127.0.0.1:57004:57100"
+    - "127.0.0.1:57204:57300"
     volumes:
     - "/Users/omrishapira/.nuget/packages:/root/.nuget/packages"
     - "/Users/omrishapira/Desktop/ProductsCatalog/ProductCatalogService:/app:rw"
     - "/Users/omrishapira/Desktop/ProductsCatalog:/src:rw"
+    - "/Users/omrishapira/.local/share/JetBrains/RiderRemoteDebugger/2023.3.3/LinuxArm64:/opt/rider-debugger"
+    - "/Applications/Rider.app/Contents/bin:/etc/opt/rider-debugger/backend-log.xml"
+    - "/Users/omrishapira/Library/Logs/JetBrains/Rider2023.3/DebuggerWorker/JetBrains.Debugger.Worker.2024_7_12_00_50_49:/var/opt/rider-debugger:rw"
     working_dir: "/app"
