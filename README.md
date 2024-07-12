@@ -27,7 +27,7 @@ This project is a simple API for managing products and catalogs.
 
 
 ## Endpoints
-Products endpoints:
+### Products endpoints:
 - Create a new product
 - Get all products
 - Get a product by Id
@@ -35,7 +35,7 @@ Products endpoints:
 - Get products by Price limit - get products with a lower price
 - Update a product
 - Delete a product
-Catalogs endpoints:
+### Catalogs endpoints:
 - Get all Catalogs
 - Get a Catalog by Id
 - Get a CatalogId by ProductId - returns the catalog Id/s which contains the product.
@@ -44,7 +44,7 @@ Catalogs endpoints:
 
 ## Product CRUD - JSON Examples
 
-POST /Products 
+### POST /Products 
 - Body:
 ```json
 {
@@ -61,7 +61,7 @@ POST /Products
 }
 ```
 
-GET /Products
+### GET /Products
 ```json
 
   {
@@ -101,7 +101,7 @@ GET /Products
 
 ## Catalog CRUD
 
-POST /Catalogs
+### POST /Catalogs
 - Body:
 ```json
 {
@@ -112,7 +112,7 @@ POST /Catalogs
 }
 ```
 
-GET /Catalogs/{id}
+### GET /Catalogs/{id}
 ```json
 {
   "id": "eeb0c0f7-7e87-47ab-ac0e-3c7cec7e501c",
