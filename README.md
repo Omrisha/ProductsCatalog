@@ -7,10 +7,13 @@ This project is a simple API for managing products and catalogs.
 - Docker
 - Visual Studio/Rider
 - Postman (optional)
+- MongoDB (optional)
 
 ## Installation
 
 ### Option 1: IDE (Visual Studio/Rider)
+- Run MongoDB on your local machine, or use docker command 
+- `docker container run -p 27017:27017 --name mongodbcontainer -e MONGO_INITDB_ROOT_USERNAME="root" -e MONGO_INITDB_ROOT_PASSWORD="rootpassword" -v mongodb_data_container:/data/db mongo:latest`
 - Clone the repository `git clone https://github.com/Omrisha/ProductsCatalog.git`
 - Open the solution in Visual Studio/Rider or any IDE of your choice.
 - Run the project.
