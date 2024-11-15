@@ -27,7 +27,7 @@ public class CatalogsController : ControllerBase
             .GetCatalogsAsync())
             .ToList();
         
-        return this.Ok(catalogDtos);
+        return Ok(catalogDtos);
     }
     
     [HttpGet("{id}")]
@@ -36,16 +36,16 @@ public class CatalogsController : ControllerBase
         CatalogDto catalogDto = await this.catalogService
             .GetCatalogByIdAsync(id);
         
-        return this.Ok(catalogDto);
+        return Ok(catalogDto);
     }
     
-    [HttpGet("ProductId/{productId}")]
+    [HttpGet("Product/{productId}")]
     public async Task<IActionResult> GetByProductId(Guid productId)
     {
         CatalogDto catalogDto = await this.catalogService
             .GetCatalogByProductIdAsync(productId);
         
-        return this.Ok(catalogDto);
+        return Ok(catalogDto);
     }
     
     [HttpPost]
@@ -56,10 +56,10 @@ public class CatalogsController : ControllerBase
 
         if (output.Errors.Count != 0)
         {
-            return this.BadRequest(output.Errors);
+            return BadRequest(output.Errors);
         }
         
-        return this.Ok(output.Id);
+        return Ok(output.Id);
     }
 
     [HttpPut("{id}")]
@@ -71,10 +71,10 @@ public class CatalogsController : ControllerBase
 
         if (output.Errors.Count != 0)
         {
-            return this.BadRequest(output.Errors);
+            return BadRequest(output.Errors);
         }
 
-        return this.NoContent();
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
@@ -85,9 +85,9 @@ public class CatalogsController : ControllerBase
 
         if (output.Errors.Count != 0)
         {
-            return this.BadRequest(output.Errors);
+            return BadRequest(output.Errors);
         }
 
-        return this.NoContent();
+        return NoContent();
     }
 }

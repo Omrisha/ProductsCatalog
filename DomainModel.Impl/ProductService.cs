@@ -108,10 +108,13 @@ public class ProductService : IProductService
             output.Errors.Add("Product with selected key not found");
         }
 
-        this.mapper.Map<UpdateProductInput, Product>(product, productToUpdate);
+        if (output.Errors.Count == 0)
+        {
+            this.mapper.Map<UpdateProductInput, Product>(product, productToUpdate);
 
-        await this.productRepository
-            .UpdateAsync(productToUpdate);
+            await this.productRepository
+                .UpdateAsync(productToUpdate);
+        }
 
         return output;
     }
@@ -130,9 +133,12 @@ public class ProductService : IProductService
         {
             output.Errors.Add("Product with selected key not found");
         }
-        
-        await this.productRepository
-            .DeleteAsync(id);
+
+        if (output.Errors.Count == 0)
+        {
+            await this.productRepository
+                .DeleteAsync(id);
+        }
 
         return output;
     }
@@ -141,13 +147,13 @@ public class ProductService : IProductService
     {
         List<string> errors = new();
 
-        UniquePropertyDto? voltage = uniqueProperties.FirstOrDefault(up => up.Name == "Voltage");
+        UniquePropertyDto? voltage = uniqueProperties.FirstOrDefault(up => up.Name.ToLower() == "voltage");
         if (voltage == null)
         {
             errors.Add("Electric product must have voltage");
         }
 
-        UniquePropertyDto? socketType = uniqueProperties.FirstOrDefault(up => up.Name == "SocketType");
+        UniquePropertyDto? socketType = uniqueProperties.FirstOrDefault(up => up.Name.ToLower() == "sockettype");
         if (socketType == null)
         {
             errors.Add("Electric product must have socket type");

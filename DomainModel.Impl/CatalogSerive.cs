@@ -184,8 +184,11 @@ public class CatalogService : ICatalogService
             output.Errors.Add("Catalog with selected key not found");
         }
 
-        await this.catalogRepository
-            .DeleteAsync(id);
+        if (output.Errors.Count == 0)
+        {
+            await this.catalogRepository
+                .DeleteAsync(id);
+        }
 
         return output;
     }

@@ -30,7 +30,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     
     public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return await this.collection.Find(_ => true).ToListAsync();
+        return await this.collection.Find(e => true).ToListAsync();
     }
     
     public async Task<TEntity> GetByIdAsync(Guid id)
